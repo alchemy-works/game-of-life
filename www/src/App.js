@@ -50,11 +50,15 @@ export default {
                 this.startTime = now
             }
             this.running = true
-            while (this.running) {
-                await new Promise((resole) => setTimeout(resole, 50))
-                this.updateRunningDuration()
-                this.gridData = getNextGridData(this.gridData)
+            this.step()
+        },
+        step() {
+            if (!this.running) {
+                return
             }
+            this.updateRunningDuration()
+            this.gridData = getNextGridData(this.gridData)
+            requestAnimationFrame(this.step)
         },
         pauseGame() {
             this.pauseTime = new Date().getTime()
