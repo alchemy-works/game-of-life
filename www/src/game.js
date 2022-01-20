@@ -1,15 +1,14 @@
-const length = 100
-
-export function getEmptyGridData() {
+export function getEmptyGridData(length) {
     return Array.from({ length }).map(() => Array.from({ length }).map(() => undefined))
 }
 
-export function getInitialGridData() {
+export function getInitialGridData(length) {
     return Array.from({ length }).map(() => Array.from({ length }).map(() => Math.random() > 0.5 ? 1 : 0))
 }
 
 export function getNextGridData(gridData = []) {
-    const nextGridData = getEmptyGridData()
+    const length = gridData.length
+    const nextGridData = getEmptyGridData(length)
 
     for (let i = 0; i < length; i++) {
         for (let j = 0; j < length; j++) {
@@ -58,3 +57,4 @@ export function getNextGridData(gridData = []) {
     }
     return nextGridData
 }
+
