@@ -3,6 +3,8 @@ import { css } from './modules.js'
 const _Container = css`
   border-collapse: collapse;
   margin: 0 auto;
+  width: max-content;
+  height: max-content;
 
   > tbody {
     > tr {
