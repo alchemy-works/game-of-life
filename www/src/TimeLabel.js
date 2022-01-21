@@ -1,15 +1,18 @@
 import { css } from './modules.js'
 
-function paddingLeft(n) {
-    return n.toString().padStart(2, '0')
-}
-
 const _TimeLabel = css`
-  position: absolute;
+  position: fixed;
   top: 0;
-  left: 15px;
-  font-size: 1.25rem;
-  color: #111;
+  right: 30px;
+  font-size: 1rem;
+  color: #fff;
+  user-select: none;
+  pointer-events: none;
+  z-index: 2000;
+  opacity: .9;
+  height: 25px;
+  line-height: 25px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 `
 
 export default {

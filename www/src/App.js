@@ -7,7 +7,7 @@ export default {
     template: `
       <div id="app">
       <TimeLabel :duration="runningDuration"/>
-      <Container :gridData="gridData"/>
+      <Container :gridData="gridData" @toggle="handleToggleGrid"/>
       </div>
     `,
     data() {
@@ -73,6 +73,11 @@ export default {
         },
         updateRunningDuration() {
             this.runningDuration = new Date().getTime() - this.startTime - this.pauseDuration
+        },
+        handleToggleGrid({ i, j }) {
+            const gridData = [...this.gridData]
+            gridData[i][j] = gridData[i][j] ^ 1
+            this.gridData = gridData
         },
     },
 }

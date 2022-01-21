@@ -29,7 +29,8 @@ export default {
       <table class="${_Container}">
       <tbody>
       <tr v-for="(row, rowIndex) of gridData" :key="rowIndex">
-        <td v-for="(item, itemIndex) of row" :key="itemIndex" :class="item ? 'alive' : 'die'"/>
+        <td v-for="(item, itemIndex) of row" :key="itemIndex" :class="item ? 'alive' : 'die'"
+            @click="handleClickGrid(rowIndex, itemIndex)"/>
       </tr>
       </tbody>
       </table>
@@ -40,4 +41,9 @@ export default {
             required: true,
         },
     },
+    methods: {
+        handleClickGrid(i, j) {
+            this.$emit('toggle', { i, j })
+        }
+    }
 }
