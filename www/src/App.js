@@ -32,7 +32,7 @@ export default {
                     const _ = this.startGame()
                 }
             },
-            reset: () => this.resetGame(),
+            reset: this.resetGame,
         })
         const _ = this.startGame()
     },

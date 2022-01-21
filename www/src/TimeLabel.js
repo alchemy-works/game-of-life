@@ -10,14 +10,12 @@ const _TimeLabel = css`
   pointer-events: none;
   z-index: 2000;
   opacity: .9;
-  height: 25px;
-  line-height: 25px;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 `
 
 export default {
     template: `
-      <div class="${_TimeLabel}">
+      <div class="${_TimeLabel}" :style="heightStyle">
       {{ durationText }}
       </div>
     `,
@@ -27,7 +25,18 @@ export default {
             default: () => 0,
         },
     },
+    data() {
+        return {
+            height: '0',
+        }
+    },
+    mounted() {
+        this.setHeight()
+    },
     computed: {
+        heightStyle() {
+            return `height: ${this.height}; line-height: ${this.height};`
+        },
         durationText() {
             const milliseconds = this.duration % 1000
             const seconds = Math.trunc(this.duration / 1000) % 60
@@ -37,6 +46,16 @@ export default {
                 seconds.toString().padStart(2, '0'),
                 milliseconds.toString().padStart(3, '0'),
             ].join(':')
+        },
+    },
+    methods: {
+        setHeight() {
+            const lilGuiRoot = document.querySelector('.lil-gui.root')
+            if (!lilGuiRoot) {
+                requestAnimationFrame(this.setHeight)
+            } else {
+                this.height = getComputedStyle(lilGuiRoot).height
+            }
         },
     },
 }
