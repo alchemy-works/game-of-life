@@ -29,19 +29,19 @@ export default {
                     this.pauseGame()
                 }
                 if (!this.running && ev.object.running) {
-                    const _ = this.startGame()
+                    this.startGame()
                 }
             },
             reset: this.resetGame,
         })
-        const _ = this.startGame()
+        this.startGame()
     },
     components: {
         Container,
         TimeLabel,
     },
     methods: {
-        async startGame() {
+        startGame() {
             const now = new Date().getTime()
             if (this.pauseTime) {
                 this.pauseDuration += now - this.pauseTime
