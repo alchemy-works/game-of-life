@@ -1,37 +1,107 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Game of Life</title>
     <style>
         * {
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            padding: 0;
             margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            position: relative;
+            display: flow-root;
+            background-color: #f9f9f9;
             font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-            background-color: rgb(248 250 252);
         }
 
-        #app {
-            height: 100vh;
-            display: grid;
-            position: relative;
-            place-items: center;
+        .box-title {
+            text-align: center;
+        }
+
+        .nav {
+            box-sizing: border-box;
+            margin: 0 auto;
+            padding: 1rem;
+            max-width: 800px;
+        }
+
+        .nav > ul {
+            box-sizing: border-box;
+            border: 1px solid #eee;
+            padding: 0;
+
+        }
+
+        .nav > ul > li {
+            box-sizing: border-box;
+            list-style: none;
+            cursor: pointer;
+        }
+
+        .nav > ul > li:not(:first-child) {
+            border-top: 1px solid #eee;
+        }
+
+        .nav > ul > li:hover {
+            background-color: #eee;
+        }
+
+        .link {
+            box-sizing: border-box;
+            display: block;
+            color: inherit;
+            text-decoration: inherit;
+            font-size: 1.25rem;
+            line-height: 1.75rem;
+            font-weight: 500;
+            letter-spacing: 0.025em;
+            opacity: .75;
+            padding: 1rem 1rem;
+        }
+
+        a.github-icon {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            cursor: pointer;
+        }
+
+        a.github-icon:hover {
+            opacity: .7;
         }
     </style>
-    <title>Game of Life</title>
 </head>
+
 <body>
-<div id="app">
-    Loading...
+<div>
+    <div class="box-title">
+        <h1>Game of Life</h1>
+
+    </div>
+    <nav class="nav">
+        <ul>
+            <li><a class="link" href="./index_react.html">React</a></li>
+            <li><a class="link" href="./index_vue2.html">Vue 2</a></li>
+            <li><a class="link" href="./index_vue3.html">Vue 3</a></li>
+            <li><a class="link" href="./index_vue3_legacy.html">Vue 3 Legacy</a></li>
+        </ul>
+    </nav>
+
+    <a class="github-icon" href="//github.com/alchemy-works/game-of-life">
+        <svg height="32" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="32" data-view-component="true"
+             class="octicon octicon-mark-github v-align-middle">
+            <path fill-rule="evenodd"
+                  d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+        </svg>
+    </a>
 </div>
-<script src="https://unpkg.com/@emotion/css@11.7.1/dist/emotion-css.umd.min.js"></script>
-<script src="https://unpkg.com/vue@2.6.14/dist/vue.min.js"></script>
-<script src="https://unpkg.com/lil-gui@0.16.0/dist/lil-gui.umd.min.js"></script>
-<script src="./src/main.js" type="module"></script>
 </body>
+
+</html>

@@ -1,7 +1,7 @@
-import { onMounted, reactive } from './modules.js'
+import { onMounted, shallowReactive } from './modules.js'
 import Container from './Container.js'
-import { getInitialGridData, getNextGridData } from './game.js'
-import { createGUI } from './gui.js'
+import { getInitialGridData, getNextGridData } from '../src/game.js'
+import { createGUI } from '../src/gui.js'
 import TimeLabel from './TimeLabel.js'
 
 export default {
@@ -14,7 +14,7 @@ export default {
     setup(props) {
         const length = 100
 
-        const state = reactive({
+        const state = shallowReactive({
             length,
             running: true,
             gridData: getInitialGridData(length),
@@ -24,15 +24,11 @@ export default {
             runningDuration: 0,
         })
 
-        function updateRunningDuration() {
-            state.runningDuration = new Date().getTime() - state.startTime - state.pauseDuration
-        }
-
         function step() {
             if (!state.running) {
                 return
             }
-            updateRunningDuration()
+            state.runningDuration = new Date().getTime() - state.startTime - state.pauseDuration
             state.gridData = getNextGridData(state.gridData)
             requestAnimationFrame(step)
         }

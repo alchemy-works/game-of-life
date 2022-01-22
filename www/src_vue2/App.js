@@ -1,6 +1,6 @@
 import Container from './Container.js'
-import { getInitialGridData, getNextGridData } from './game.js'
-import { createGUI } from './gui.js'
+import { getInitialGridData, getNextGridData } from '../src/game.js'
+import { createGUI } from '../src/gui.js'
 import TimeLabel from './TimeLabel.js'
 
 export default {
@@ -56,7 +56,7 @@ export default {
             if (!this.running) {
                 return
             }
-            this.updateRunningDuration()
+            this.runningDuration = new Date().getTime() - this.startTime - this.pauseDuration
             this.gridData = getNextGridData(this.gridData)
             requestAnimationFrame(this.step)
         },
@@ -70,9 +70,6 @@ export default {
             this.pauseDuration = 0
             this.runningDuration = 0
             this.gridData = getInitialGridData(this.length)
-        },
-        updateRunningDuration() {
-            this.runningDuration = new Date().getTime() - this.startTime - this.pauseDuration
         },
         handleToggleGrid({ i, j }) {
             const gridData = [...this.gridData]
