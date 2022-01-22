@@ -1,4 +1,4 @@
-import { html, useEffect, useReducer} from './modules.js'
+import { html, useEffect, useReducer } from './modules.js'
 import TimeLabel from './TimeLabel.js'
 import Container from './Container.js'
 import { createGUI } from '../src/gui.js'
@@ -79,6 +79,27 @@ function reducer(state, action) {
     return typeof handle === 'function' ? handle(state, action) : state
 }
 
+function startStep(dispatch) {
+    let running = false
+
+    function step() {
+        if (!running) {
+            return
+        }
+        dispatch({ type: 'step' })
+        requestAnimationFrame(step)
+    }
+
+    document.addEventListener('_start', () => {
+        running = true
+        requestAnimationFrame(step)
+    })
+
+    document.addEventListener('_stop', () => {
+        running = false
+    })
+}
+
 export default function App(props) {
     const [state, dispatch] = useReducer(reducer, initialState)
 
@@ -88,28 +109,12 @@ export default function App(props) {
 
     function startGame() {
         dispatch({ type: 'startGame' })
+        startStep(dispatch)
     }
 
     function resetGame() {
         dispatch({ type: 'resetGame' })
     }
-
-    useEffect(() => {
-        if (!state.running) {
-            return
-        }
-        let handle
-
-        function step() {
-            dispatch({ type: 'step' })
-            handle = requestAnimationFrame(step)
-        }
-        handle = requestAnimationFrame(step)
-
-        return () => {
-            cancelAnimationFrame(handle)
-        }
-    }, [state.running])
 
     useEffect(() => {
         createGUI({
@@ -120,6 +125,11 @@ export default function App(props) {
         })
         startGame()
     }, [])
+
+    useEffect(() => {
+        const ev = state.running ? '_start' : '_stop'
+        document.dispatchEvent(new CustomEvent(ev))
+    }, [state.running])
 
     return html`
         <${TimeLabel} key="time-label" duration=${state.runningDuration}></TimeLabel>
